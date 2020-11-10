@@ -35,12 +35,12 @@ git clone https://ucbalm@dev.azure.com/ucbalm/<UCB%Project>/_git/<Repository>
 
 In this section the basic workflow of a task will be covered along with the requisite commands.
 
-When starting a new body of work, always start a new branch, ideally from the most up to date version of master, which can be updated using the commands:
+Before making changes to a repo, checkout to the master branch and make sure it is up-to-date:
 ```
 git checkout master
 git pull -r
 ```
-With our current approach to git, code on master is required to be complete and finished. Commits should never be pushed directly to the remote master branch.
+When starting a new body of work, always start a new branch. With our current approach to git, code on master is required to be complete and finished. Commits should **never** be pushed directly to the remote master branch on repos with multiple collaborators.
 ```
 # Creates a new branch rooted on the current HEAD commit
 git checkout -b <branch-name>
@@ -58,14 +58,14 @@ The `-u` flag is shorthand for `set-upstream`, which is git terminology for the 
 If the branch has only one developer, progress is simple. When more that one developer alters remote branches, complications arise that are dealt with later (Merging and Rebasing). Once the work is complete for a feature, a pull-request can be created using the github interface, conflicts resolved and finally the work merged, which will add your commits into master while creating an extra merge commit, and the branch deleted. Occasionally, merging into master will be blocked by _merge conflicts_, which will be discussed after detailing merging and rebasing.
 
 ### Making Changes
-Consider the case where you have two files (`test_A.R` and `test_B.R`) you wish to add to a Git repo. There are multiple ways to add files to the staging area:
+Consider the case where you have two files (`test_A.R` and `test_B.R`) you wish to add to a Git repo. There are multiple ways to add files to the staging area; below we propose four alternatives:
 ```
 git add test_A.R
 git add test_A.R test_B.R
 git add .
 git add -u
 ```
-The first two commands add specific files to the staging area by directly calling their file names. The third command adds all files within the current working directory (`./`) to staging, whereas the fourth adds all modified files to the staging area. The latter is particularly useful if working with many modified scripts in a repository that includes additional files (such as data or `.pdf`s) that may not be committed to the repository.
+The first two commands add specific files to the staging area by directly calling their file names. The third command adds all files within the current working directory (`./`) to staging, whereas the fourth adds all modified files to the staging area. The latter is particularly useful if working with many modified scripts in a repository that includes additional files (such as datasets or `.pdf`s) that may not be committed to the repository.
 
 ### Commiting Changes
 
